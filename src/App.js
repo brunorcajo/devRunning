@@ -1,26 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import store from "./redux";
+import { Provider } from "react-redux";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+
+import { Container } from 'semantic-ui-react'
+
+import Home from "./screens/Home";
+import Admin from "./screens/Admin";
+import Restrito from "./screens/Restrito";
+import Login from "./screens/Login";
+import CreateAccount from "./screens/CreateAccount";
 
 class App extends Component {
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <Container>
+            <Route exact path="/" component={Home} />
+            <Route path="/admin" component={Admin} />
+            <Route path="/restrito" component={Restrito} />
+            <Route path="/login" component={Login} />
+            <Route path="/create-account" component={CreateAccount} />
+          </Container>
+        </Router>
+      </Provider>
     );
   }
 }
